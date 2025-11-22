@@ -94,7 +94,7 @@ class EmployeesDetailsAPi(APIView):
             Employees = Employee.objects.get(pk=pk)
         except Employee.DoesNotExist:
             return Response({"error":"employee not fount"},status=404)
-        seralizer = EmployeeSerializer(Employee)
+        seralizer = EmployeeSerializer(Employees)
         return Response(seralizer.data)
     
     
@@ -104,7 +104,7 @@ class EmployeesDetailsAPi(APIView):
         except Employee.DoesNotExist:
             return Response({"error":"employee not found"},status=404)
         
-        seralizers = EmployeeSerializer(Employee,data = request.data)
+        seralizers = EmployeeSerializer(Employees,data = request.data)
         if seralizers.is_valid():
             seralizers.save()
             return Response({"status":"success","Response_code":status.HTTP_201_CREATED,"message":"employee datas are updated"})
